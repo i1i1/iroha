@@ -210,7 +210,8 @@ impl Peer {
             .kura_configuration
             .kura_block_store_path(temp_dir.path())
             .unwrap();
-        let info_span = iroha_logger::info_span!("test-peer", "{}", &self.api_address);
+		let id: u32 = rand::random();
+        let info_span = iroha_logger::info_span!("test-peer", "{}, id = {}, port = {:p}", &self.api_address, id, &unique_port::PORT_IDX);
         let join_handle = task::spawn(
             async move {
                 let iroha = Iroha::new(&configuration, permissions.into()).unwrap();
@@ -235,7 +236,8 @@ impl Peer {
     ) -> task::JoinHandle<()> {
         let temp_dir = TempDir::new().expect("Failed to create temp dir.");
         let mut configuration = self.get_config(configuration);
-        let info_span = iroha_logger::info_span!("test-peer", "{}", &self.api_address);
+		let id: u32 = rand::random();
+        let info_span = iroha_logger::info_span!("test-peer", "{}, id = {}, port = {:p}", &self.api_address, id, &unique_port::PORT_IDX);
         let join_handle = task::spawn(
             async move {
                 let temp_dir = temp_dir;
@@ -284,12 +286,16 @@ impl Peer {
             address: p2p_address.clone(),
             public_key: key_pair.public_key.clone(),
         };
-        Ok(Self {
+		let peer = Self {
             id,
             key_pair,
             p2p_address,
             api_address,
-        })
+        };
+		let bt = backtrace::Backtrace::new();
+		eprintln!("peer = {{ p2p = {}, api = {} }}", peer.p2p_address, peer.api_address);
+		eprintln!("bt = {:?}", bt);
+        Ok(peer)
     }
 
     /// Starts peer with default configuration.

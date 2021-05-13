@@ -1465,7 +1465,7 @@ dependencies = [
  "serde_json",
  "tempfile",
  "tracing",
- "unique_port",
+ "unique_port 0.1.0",
  "ursa",
 ]
 
@@ -1497,7 +1497,7 @@ dependencies = [
  "test_network",
  "tracing",
  "tungstenite",
- "unique_port",
+ "unique_port 0.1.0",
  "ursa",
 ]
 
@@ -2991,6 +2991,7 @@ name = "test_network"
 version = "0.1.0"
 dependencies = [
  "async-std",
+ "backtrace",
  "iroha",
  "iroha_client",
  "iroha_data_model",
@@ -2999,7 +3000,7 @@ dependencies = [
  "iroha_network",
  "rand 0.7.3",
  "tempfile",
- "unique_port",
+ "unique_port 0.1.1",
 ]
 
 [[package]]
@@ -3215,6 +3216,13 @@ name = "unique_port"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "03317192628d75afc1c0f8329774df8da78d3bf33165072cb4c4a9166c3c7b07"
+dependencies = [
+ "once_cell",
+]
+
+[[package]]
+name = "unique_port"
+version = "0.1.1"
 dependencies = [
  "once_cell",
 ]

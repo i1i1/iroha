@@ -8,7 +8,7 @@ edition = "2018"
 
 [dependencies]
 tempfile = "3"
-unique_port = "0.1.0"
+unique_port = { path = "../../../unique_port" }
 iroha = { path = "../../iroha" }
 iroha_client = { path = "../../iroha_client" }
 iroha_data_model = { path = "../../iroha_data_model" }
@@ -17,3 +17,4 @@ iroha_error = { path = "../../iroha_error" }
 iroha_network = { path = "../../iroha_network", features = ["test-no-timeout"] }
 async-std = { version = "=1.6.2", features = ["attributes"] }
 rand = "0.7.3"
+backtrace = "0.3"
